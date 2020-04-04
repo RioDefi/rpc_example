@@ -232,31 +232,31 @@ const chainTypes = {
 }
 
 const rpctest = async () => {
-try {
-  const provider = new HttpProvider('https://node.riochain.io/rpc')
-  const registry = new TypeRegistry()
-  registry.register(chainTypes) // register chain types
-  const riometadata = await provider.send('state_getMetadata', []) // get metadata from chain
-  // console.log('rpc state_getMetadata', riometadata)
-  const metadata = new Metadata(registry, riometadata) // produce metadata
-  const storageKey = new StorageKey(
-    registry,
-    metadata
-      .query
-      .rioAssets
-      .freeBalance([0, '5DNzCdfuQH8XhLAiB2tv9SPfPEErgSvhq7GmbMv2mSVhrtw6'])
-  ).toHex() // generate storage key
+  try {
+    const provider = new HttpProvider('https://node.riochain.io/rpc')
+    const registry = new TypeRegistry()
+    registry.register(chainTypes) // register chain types
+    const riometadata = await provider.send('state_getMetadata', []) // get metadata from chain
+    // console.log('rpc state_getMetadata', riometadata)
+    const metadata = new Metadata(registry, riometadata) // produce metadata
+    const storageKey = new StorageKey(
+      registry,
+      metadata
+        .query
+        .rioAssets
+        .freeBalance([0, '5DNzCdfuQH8XhLAiB2tv9SPfPEErgSvhq7GmbMv2mSVhrtw6'])
+    ).toHex() // generate storage key
 
-  console.log('StorageKey', storageKey)
-  const fromBlockHash = await provider.send('chain_getBlockHash', [0])
-  // console.log('chain hash', hash)
-  const result = await provider.send('state_queryStorage', [[storageKey], fromBlockHash])
-  console.log('rpc state_queryStorage', JSON.stringify(result))
-} catch(error) {
-  console.log(error.message)
+    console.log('StorageKey', storageKey)
+    const fromBlockHash = await provider.send('chain_getBlockHash', [0])
+    // console.log('chain hash', hash)
+    const result = await provider.send('state_queryStorage', [[storageKey], fromBlockHash])
+    console.log('rpc state_queryStorage', JSON.stringify(result))
+  } catch(error) {
+    console.log(error.message)
+  }
 }
-}
 
 
-  rpctest()
+rpctest()
 

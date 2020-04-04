@@ -5,7 +5,7 @@
 yarn install
 #+END_SRC
 
-* run
+* Run
 #+BEGIN_SRC sh
 node index.js
 #+END_SRC

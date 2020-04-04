@@ -1,0 +1,11 @@
+#+title: rpc_example
+
+* Install
+#+BEGIN_SRC sh
+yarn install
+#+END_SRC
+
+* run
+#+BEGIN_SRC sh
+node index.js
+#+END_SRC
